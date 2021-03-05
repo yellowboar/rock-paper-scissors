@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Page Title</title>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+    <script>
+        const capitalize = (word) => {
+            let temp = word.toLowerCase()
+            return temp.charAt(0).toUpperCase() + temp.slice(1)
+        }
+
+        const computerPlay = () => {
+            let arr = ['Rock', 'Paper', 'Scissors']
+            return arr[Math.floor(Math.random() * 3)]
+        }
+
+        const playRound = (playerSelection, computerSelection) => {
+            let win = -1
+            if (playerSelection == computerSelection) 
+                return win;
+            
+            if (playerSelection == 'Rock') {
+                if (computerSelection == 'Paper') win = 0
+                else if (computerSelection == 'Scissors') win = 1 
+            } else if (playerSelection == 'Paper') {
+                if (computerSelection == 'Rock') win = 1
+                else if (computerSelection == 'Scissors') win = 0
+            } else if (playerSelection == 'Scissors') {
+                if (computerSelection == 'Rock') win = 0
+                else if (computerSelection == 'Paper') win = 1
+            }
+
+            return win;
+
+        }
+
+        const game = () => {
+            let playerWins = 0, computerWins = 0
+            for (i = 0; i < 5; i++) {
+                let playerInput = prompt('Enter your move.')
+                let playerSelection = capitalize(playerInput)
+                let computerSelection = capitalize(computerPlay())
+                console.log(`You chose: ${playerSelection}.`)
+                console.log(`Computer chose: ${computerSelection}.`)
+
+                let result = playRound(playerSelection, computerSelection)
+                if (result == 1) {
+                    playerWins++;
+                    console.log(`You win. ${playerSelection} beats ${computerSelection}.`)
+                } else if (result == 0) {
+                    computerWins++
+                    console.log(`You lose. ${computerSelection} beats ${playerSelection}.`)
+                } else {
+                    console.log(`It's a tie. You both played ${playerSelection}.`)
+                }
+            }
+            if (playerWins > computerWins) {
+                console.log(`The player won overall, winning ${playerWins} out of 5.`)
+            } else if (playerWins < computerWins) {
+                console.log(`The computer won overall, winning ${computerWins} out of 5.`)
+            } else {
+                console.log('The player and the computer tied.')
+            }
+
+        }
+
+        game()
+
+
+
+  </script>
+</body>
+</html>
